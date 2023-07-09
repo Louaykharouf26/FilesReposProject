@@ -38,7 +38,9 @@ pipeline {
         }
         */
 
-        post {
+       
+    }
+     post {
             success {
                 echo "======== Storage account created successfully ========"
             }
@@ -46,8 +48,6 @@ pipeline {
                 echo "======== Storage account creation failed ========"
             }
         }
-    }
-    
     /*
     post {
         success {
