@@ -21,7 +21,7 @@ pipeline{
                        }            
                         }
                     } 
-        stage("Ansible configruation") {
+        /*stage("Ansible configruation") {
             steps {                
                 script {
                     echo "======== executing ========"
@@ -37,13 +37,13 @@ pipeline{
                        }    }        
                         }
                     }              
-                }
+                }*/
             post{
                 success{
-                    echo "======== Setting up infra executed successfully ========"
+                    echo "======== Storage account created Successfully ========"
                 }
                 failure{
-                    echo "======== Setting up infra execution failed ========"
+                    echo "======== Storage account creation failed ========"
                 }
             }
              
