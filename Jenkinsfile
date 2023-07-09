@@ -1,59 +1,61 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("getting code") {
+
+    stages {
+        stage("Getting code") {
             steps {
-                git url: 'https://github.com/Louaykharouf26/FilesReposProject.git', branch: 'master',
-                credentialsId: 'github-credentials' //jenkins-github-creds
+                git(
+                    url: 'https://github.com/Louaykharouf26/FilesReposProject.git',
+                    branch: 'master',
+                    credentialsId: 'github-credentials'
+                )
                 sh "ls -ltr"
             }
         }
 
-       stage("Setting up infra") {
-            steps {                
-                script {
-                    echo "======== executing ========"
-                        sh "pwd"
-                        sh "ls"
-                        echo "terraform init"
-                        sh "terraform init"
-                        sh "terraform apply --auto-approve --var-fime"     
-                       }            
-                        }
-                    } 
-        /*stage("Ansible configruation") {
-            steps {                
-                script {
-                    echo "======== executing ========"
-                        dir ("ansible"){
-                        sh "pwd"
-                        sh "ls"
-                        echo "update hosts"
-                        sh "ansible-playbook update-hosts.yml"
-                        echo "install dependencies "
-                        sh "ansible-playbook -i hosts config-playbook.yml"
-                        echo "configure the environement for the web app "
-                        sh "ansible-playbook -i hosts web-app-config.yml"     
-                       }    }        
-                        }
-                    }              
-                }*/
-            post{
-                success{
-                    echo "======== Storage account created Successfully ========"
-                }
-                failure{
-                    echo "======== Storage account creation failed ========"
+        stage("Setting up infra") {
+            steps {
+                echo "======== Executing ========"
+                sh "pwd"
+                sh "ls"
+                sh "terraform init"
+                sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/Backend/Terraform/terraform.tfvars.json"
+            }
+        }
+
+        /*
+        stage("Ansible configuration") {
+            steps {
+                echo "======== Executing ========"
+                dir("ansible") {
+                    sh "pwd"
+                    sh "ls"
+                    sh "ansible-playbook update-hosts.yml"
+                    sh "ansible-playbook -i hosts config-playbook.yml"
+                    sh "ansible-playbook -i hosts web-app-config.yml"
                 }
             }
-             
-        }   }     
-   /* 
-    post{
-        success{
-            echo "========pipeline executed successfully ========"
         }
-        failure{
-            echo "========pipeline execution failed========"
+        */
+
+        post {
+            success {
+                echo "======== Storage account created successfully ========"
+            }
+            failure {
+                echo "======== Storage account creation failed ========"
+            }
         }
-    }*/
+    }
+    
+    /*
+    post {
+        success {
+            echo "======== Pipeline executed successfully ========"
+        }
+        failure {
+            echo "======== Pipeline execution failed ========"
+        }
+    }
+    */
+}
