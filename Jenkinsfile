@@ -17,7 +17,7 @@ pipeline{
                         sh "ls"
                         echo "terraform init"
                         sh "terraform init"
-                        sh "terraform apply --auto-approve "     
+                        sh "terraform apply --auto-approve --var-fime"     
                        }            
                         }
                     } 
@@ -47,7 +47,7 @@ pipeline{
                 }
             }
              
-        }        
+        }   }     
    /* 
     post{
         success{
