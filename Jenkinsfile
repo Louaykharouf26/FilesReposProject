@@ -13,15 +13,18 @@ pipeline {
             }
         }
 
-        stage("Setting up infra") {
-            steps {
-                echo "======== Executing ========"
-                sh "pwd"
-                sh "ls"
-                sh "terraform init"
-                sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/terraform.tfvars.json"
-            }
+       stage("Setting up infra") {
+    steps {
+        echo "======== Executing ========"
+        sh "pwd"
+        sh "ls"
+        dir('/BackEnd/Terraform') {
+            sh "terraform init"
+            sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/terraform.tfvars.json"
         }
+    }
+}
+
 
         /*
         stage("Ansible configuration") {
