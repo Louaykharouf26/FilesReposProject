@@ -12,14 +12,14 @@ pipeline {
                 sh "ls -ltr"
             }
         }
-      stage("azure") {
+      /*stage("azure") {
     steps {
         echo "======== Executing ========"
         sh "pwd"
         sh "ls"
         sh "az login"
     }
-}
+}*/
        stage("Setting up infra") {
     steps {
         echo "======== Executing ========"
