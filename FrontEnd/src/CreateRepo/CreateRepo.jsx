@@ -4,6 +4,7 @@ import { useRef ,useState } from 'react';
 function CreateRepo()
 {
     const RepoRef = useRef()
+    const StorageRef = useRef();
     const submitData = async (e) => {
         e.preventDefault();
         
@@ -12,6 +13,7 @@ function CreateRepo()
             subscription_id:"94bdf75f-0db0-45e0-bb43-ff113d14ea1f",
             resource_group_location:"north europe",
             resource_group_name: RepoRef.current.value,
+            storage_account_name:StorageRef.current.value
           };
           
           // Make API request
@@ -41,11 +43,16 @@ return(
         <div className="mb-3">
   <label htmlFor="exampleFormControlInput1" className="form-label">Repository Name</label>
   <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Repo Name" ref={RepoRef}></input>
-  <div className="col-auto">
+
+</div>
+<div className="mb-3">
+  <label htmlFor="exampleFormControlInput1" className="form-label">Storage Name</label>
+  <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Repo Name" ref={StorageRef}></input>
+
+</div>
+<div className="col-auto">
     <button type="submit" className="btn btn-primary mb-3" onClick={submitData}>Confirm identity</button>
   </div>
-</div>
-
 </div>
     </>
 )
