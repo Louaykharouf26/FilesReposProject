@@ -2,6 +2,9 @@ const express = require("express");
 const User = require('../Models/users')
 const jwt = require("jsonwebtoken");
 const md5 = require("md5");
+const fs = require("fs");
+const request = require("request");
+const { Octokit } = require('@octokit/rest');
 module.exports.adduser = async(req,res) =>{
     const {username, email, password,subscription_id} = req.body
     User.findOne({ email })
@@ -60,4 +63,37 @@ module.exports.getUserByUsername = async (req, res) => {
     } else {
       res.send("User not found, please recheck the username");
     }
+  };
+  module.exports.triggerPipeline = async (req, res) => {
+    const jenkins_url = `http://localhost:5000/job/FilesRepoPipeline/build`;
+    const params = req.body;
+    console.log(params);
+    var name =
+      __dirname + "\\..\\..\\Terraform\\terraform.tfvars.json";
+    var m = JSON.parse(fs.readFileSync(name).toString());
+    Object.entries(params).map((p) => {
+      m[p[0]] = p[1];
+    });
+    fs.writeFileSync(name, JSON.stringify(m));
+    //E:\PFA\backpfa\PFA\PFA\terraform-template\terraform.tfvars.json
+    //exec("docker cp ../terraform-template/terraform.tfvars.json jenkins:/var/jenkins_home/workspace/PFAPIPELINE/terraform-template", (error, stdout, stderr) => {
+      //console.log(stdout,stderr,error)
+      //console.log("success");
+   // });
+     
+    var clientServerOptions = {
+      uri: jenkins_url,
+      body: "",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa("louaykharouf:11e96d811ffd4131883788af93ff937d5d"),
+      },
+    };
+    request(clientServerOptions, function (error, response) {
+      console.log(error, response.body);
+      return;
+    });
+    res.send(m);
+
   };

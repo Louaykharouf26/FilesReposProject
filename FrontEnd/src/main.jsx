@@ -6,6 +6,8 @@ import './index.css'
 import Login from './Auth/Login.jsx';
 import SignUp from './Auth/SignUp.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
+
+import CreateRepo from './CreateRepo/CreateRepo.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/Dashboard",
     element: <Dashboard/>,
+  },
+  {
+    path: "/Form",
+    element: <CreateRepo/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
