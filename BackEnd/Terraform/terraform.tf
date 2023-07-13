@@ -13,7 +13,7 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 resource "azurerm_resource_group" "resource-group" {
-  name     = "filesRepo-resource-group"
+  name     = "${var.resource_group_name}-resource-group"
   location = var.resource_group_location
 }
 resource "azurerm_storage_account" "filesrepostorage" {
