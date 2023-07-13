@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const md5 = require("md5");
 const fs = require("fs");
 const request = require("request");
+const { exec } = require('child_process');
 const { Octokit } = require('@octokit/rest');
 module.exports.adduser = async(req,res) =>{
     const {username, email, password,subscription_id} = req.body
