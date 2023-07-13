@@ -76,10 +76,12 @@ module.exports.getUserByUsername = async (req, res) => {
     });
     fs.writeFileSync(name, JSON.stringify(m));
     //E:\PFA\backpfa\PFA\PFA\terraform-template\terraform.tfvars.json
-    //exec("docker cp ../terraform-template/terraform.tfvars.json jenkins:/var/jenkins_home/workspace/PFAPIPELINE/terraform-template", (error, stdout, stderr) => {
+    //C:\Users\louay\Desktop\GITProject\BackEnd\Terraform
+   // "../../Terraform"
+    exec("docker cp ../../Terraform/terraform.tfvars.json jenkins:/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform", (error, stdout, stderr) => {
       //console.log(stdout,stderr,error)
-      //console.log("success");
-   // });
+      console.log("success");
+   });
      
     var clientServerOptions = {
       uri: jenkins_url,
