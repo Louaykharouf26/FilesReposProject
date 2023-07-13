@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "resource-group" {
   name     = "${var.resource_group_name}-resource-group"
   location = var.resource_group_location
 }
-resource "azurerm_storage_account" "filesrepostorage" {
+resource "azurerm_storage_account" "storage" {
   name                     = "${var.storage_account_name}"
   resource_group_name      = azurerm_resource_group.resource-group.name
   location                 = var.resource_group_location
