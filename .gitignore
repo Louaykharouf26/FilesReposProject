@@ -5,3 +5,4 @@ BackEnd/API/.env
 *.terraform.tfstate.lock.info
 *terraform.tfstate.backup
 *terraform.tfstate
+FrontEnd/.env
