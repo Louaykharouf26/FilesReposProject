@@ -25,10 +25,10 @@ pipeline {
         echo "======== Executing ========"
         sh "pwd"
         sh "ls"
-        dir('BackEnd/Terraform') {
+        dir('BackEnd/Terraform/Container') {
             sh "terraform init"
             //sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/terraform.tfvars.json"
-        sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/terraform.tfvars.json terraform-container.tf"
+        sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/Container/terraform.tfvars.json "
         }
     }
 }
