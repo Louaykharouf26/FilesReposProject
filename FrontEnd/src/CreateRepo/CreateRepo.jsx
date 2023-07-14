@@ -38,7 +38,7 @@ function CreateRepo()
 return(
     <>
     <NavbarAfterlogin2></NavbarAfterlogin2>
-    <h5 className="typewriter"><span>Fill the form to create your repositories !</span></h5>
+    <h5 className="typewriter"><span>Fill the form to create your Storage Account !</span></h5>
     <div className="form">
         <div className="mb-3">
   <label htmlFor="exampleFormControlInput1" className="form-label">Repository Name</label>
@@ -51,7 +51,7 @@ return(
 
 </div>
 <div className="col-auto">
-    <button type="submit" className="btn btn-primary mb-3" onClick={submitData}>Confirm identity</button>
+    <button type="submit" className="btn btn-primary mb-3 submit" onClick={submitData}>Create</button>
   </div>
 </div>
     </>

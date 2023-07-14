@@ -13,7 +13,7 @@ function Dashboard()
      <img src={Dashboardpng} className="dashboardpng"></img>
      <div className="pageVM">
         <a href='/'>   <button type="button" className="btn btn-outline-secondary">Home Page</button></a>
-        <a href='/Form'>   <button type="button" className="btn btn-outline-secondary">Create Repository</button></a>
+        <a href='/Form'>   <button type="button" className="btn btn-outline-secondary">Create Storage Account</button></a>
         </div>
     </>
  )

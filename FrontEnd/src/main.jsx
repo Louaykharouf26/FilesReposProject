@@ -8,6 +8,7 @@ import SignUp from './Auth/SignUp.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 
 import CreateRepo from './CreateRepo/CreateRepo.jsx';
+import ContainerList from './container.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/Form",
     element: <CreateRepo/>,
+  },
+  {
+    path: "/Container",
+    element: <ContainerList/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
