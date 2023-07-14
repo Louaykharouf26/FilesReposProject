@@ -1,4 +1,4 @@
-/*terraform {
+terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -7,13 +7,18 @@
   }
   required_version = ">= 0.14.9"
 }
-*/
+
 provider "azurerm" {
   features {}
   subscription_id = var.subscription_id
 }
+
 resource "azurerm_storage_container" "scriptscontainer" {
   name                  = var.container_name
   storage_account_name  = var.storage_account_name
   container_access_type = "blob"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
