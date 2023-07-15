@@ -24,8 +24,8 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_storage_container" "scriptscontainer" {
+/*resource "azurerm_storage_container" "scriptscontainer" {
   name                  = "files"
   storage_account_name  = azurerm_storage_account.storage.name
   container_access_type = "blob"
-}
+}*/
