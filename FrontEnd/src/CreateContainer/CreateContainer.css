@@ -1,0 +1,13 @@
+.form{
+    position: absolute;
+    top: 28%;
+    left: 32%;
+}
+#exampleFormControlInput1{
+    width: 451px;
+height: 57px;
+}
+.submit{
+    width: 451px;
+height: 54px;
+}

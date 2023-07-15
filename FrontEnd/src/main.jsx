@@ -6,7 +6,7 @@ import './index.css'
 import Login from './Auth/Login.jsx';
 import SignUp from './Auth/SignUp.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
-
+import CreateContainer from './CreateContainer/CreateContainer.jsx';
 import CreateRepo from './CreateRepo/CreateRepo.jsx';
 import ContainerList from './container.jsx';
 const router = createBrowserRouter([
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/Form",
     element: <CreateRepo/>,
+  },
+  {
+    path:"/FormContainer",
+    element:<CreateContainer></CreateContainer>
   },
   {
     path: "/Container",

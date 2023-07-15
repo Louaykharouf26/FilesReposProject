@@ -101,3 +101,39 @@ module.exports.getUserByUsername = async (req, res) => {
     res.send(m);
 
   };
+  module.exports.triggerPipelineContainer = async (req, res) => {
+    const jenkins_url = `http://localhost:5000/job/CreateRepo/build`;
+    const params = req.body;
+    console.log(params);
+    var name =
+      __dirname + "\\..\\..\\Terraform\\terraform.tfvars.json";
+    var m = JSON.parse(fs.readFileSync(name).toString());
+    Object.entries(params).map((p) => {
+      m[p[0]] = p[1];
+    });
+    fs.writeFileSync(name, JSON.stringify(m));
+    //E:\PFA\backpfa\PFA\PFA\terraform-template\terraform.tfvars.json
+    //C:\Users\louay\Desktop\GITProject\BackEnd\Terraform
+   // "../../Terraform"
+   //"../../Terraform/terraform.tfvars.json"
+    exec("docker cp ../Terraform/Container/terraform.tfvars.json jenkins:/var/jenkins_home/workspace/CreateRepo/BackEnd/Terraform/Container", (error, stdout, stderr) => {
+      console.log(stdout,stderr,error)
+      console.log("success");
+   });
+     
+    var clientServerOptions = {
+      uri: jenkins_url,
+      body: "",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa("louaykharouf:11e96d811ffd4131883788af93ff937d5d"),
+      },
+    };
+    request(clientServerOptions, function (error, response) {
+      console.log(error, response.body);
+      return;
+    });
+    res.send(m);
+
+  };
