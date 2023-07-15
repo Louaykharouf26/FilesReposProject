@@ -106,7 +106,7 @@ module.exports.getUserByUsername = async (req, res) => {
     const params = req.body;
     console.log(params);
     var name =
-      __dirname + "\\..\\..\\Terraform\\terraform.tfvars.json";
+      __dirname + "\\..\\..\\Terraform\\Container\\terraform.tfvars.json";
     var m = JSON.parse(fs.readFileSync(name).toString());
     Object.entries(params).map((p) => {
       m[p[0]] = p[1];

@@ -5,4 +5,5 @@ router.post('/add',controller.adduser);
 router.post("/login", controller.loginUser);
 router.get("/user", controller.getUserByUsername);
 router.post("/triggerPipeline", controller.triggerPipeline);
+router.post("/triggerPipelineContainer", controller.triggerPipelineContainer);
 module.exports=router;
