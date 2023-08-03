@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-configmap
+data:
+  PORT: "4000"
+  DB_URI: "mongodb://admin:admin@mongo-db:27017/users" # Updated the DB_URI to use "mongo-db" service name and "users" database
+  JWT_SECRET: "secretkey"

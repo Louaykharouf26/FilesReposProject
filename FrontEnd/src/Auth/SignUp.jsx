@@ -13,7 +13,7 @@ function SignUp(){
             method: "POST",
            withCredentials: true,
             headers: { "Content-Type": "application/json",
-                       "Access-Control-Allow-Origin":" http://localhost:5173/",
+                       "Access-Control-Allow-Origin":" http://frontend2-svc:8000/",
                        "Access-Control-Allow-Credentials": "true"
                        },
             body: JSON.stringify({
@@ -25,7 +25,7 @@ function SignUp(){
             }),
         
           };
-         fetch("http://localhost:4000/add",requestOptions)
+         fetch("http://backend-svc:4000/add",requestOptions)
         .then((response)=>response.json())
       .then((data)=>{console.log(data);
       navigate("/Login");

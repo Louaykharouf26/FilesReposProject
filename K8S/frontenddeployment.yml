@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend2
+spec:
+  replicas: 1  # Number of desired replicas for the frontend pods
+  selector:
+    matchLabels:
+      app: frontend2  # The label used to select the pods belonging to this deployment
+  template:
+    metadata:
+      labels:
+        app: frontend2  # The label applied to the pods created from this template
+    spec:
+      containers:
+        - name: frontend
+          image: louaykharouf/filesrepo:frontend
+          #command: ["start.sh"] # Use the start.sh script as the entry point (Uncomment if needed)
+          workingDir: /srv/app  # Set the working directory inside the container (Uncomment if needed)
+          ports:
+            - containerPort: 8000  # The port on which your frontend application runs inside the container
+          #volumeMounts:
+          # - name: frontend-volume
+          #   mountPath: /srv/app
+      #volumes:
+       #- name: frontend-volume
+        # hostPath:
+          # path: "../FrontEnd"  # Use the correct path to your frontend files (Uncomment if needed)
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend2-svc
+spec:
+  type: LoadBalancer  # Expose the service externally using a load balancer
+  ports:
+  - port: 8000  # Port exposed by the service
+  selector:
+    app: frontend2 # Label selector to target the pods with the 'app: frontend' label

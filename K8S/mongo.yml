@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: mongodb
+spec: 
+  selector: 
+    matchLabels: 
+      app: "mongodb"
+  replicas: 1
+  strategy: 
+    type: "RollingUpdate"
+    rollingUpdate: 
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template: 
+    metadata: 
+      labels: 
+        app: "mongodb"
+    spec: 
+      containers: 
+        - 
+          name: "mongodb"
+          image: "mongo"
+          imagePullPolicy: "Always"
+          env: 
+            - name: MONGO_INITDB_DATABASE
+              value: users
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+          ports: 
+            - 
+              containerPort: 27017
+              name: "mongodb"
+          volumeMounts: 
+            - 
+              name: "mongodb-persistent-storage"
+              mountPath: "/data/db"
+      volumes: 
+        - 
+          name: "mongodb-persistent-storage"
+          persistentVolumeClaim: 
+            claimName: "mongodb-pvc"
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mongodb
+  labels: 
+    app: "mongodb"
+spec: 
+  ports: 
+    - 
+      name: "mongodb"
+      port: 27017
+      targetPort: 27017 # Update the targetPort to match the container port of MongoDB
+  selector: 
+    app: "mongodb"
+  type: "LoadBalancer" # Use LoadBalancer type for external access
+
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec:
+      containers:
+        - name: mongo-express
+          image: mongo-express
+          env:
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: mongodb # Use "mongo-db" service name to connect to MongoDB
+            - name: ME_CONFIG_MONGODB_PORT
+              value: "27017"
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express
+spec:
+  selector:
+    app: mongo-express
+  type: LoadBalancer # Use LoadBalancer type for external access
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard

@@ -17,7 +17,7 @@ function CreateRepo()
           };
           
           // Make API request
-          const response = await fetch('http://localhost:4000/triggerPipelineContainer', {
+          const response = await fetch('http://backend-svc:4000/triggerPipelineContainer', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

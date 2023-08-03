@@ -1,0 +1,75 @@
+.welcome{
+    position: absolute;
+    left: 23%;
+    width:550px;
+    top:28%;
+}
+.detail0{
+    position: absolute;
+    left: 23%;
+    width:550px;
+    top:35%;
+}
+.detail1{
+    position: absolute;
+    left: 23%;
+    width:550px;
+    top:40%;
+}
+.detail2{
+    position: absolute;
+    left: 23%;
+    width:550px;
+    top:45%;
+}
+.detail3{
+    position: absolute;
+    left: 23%;
+    width:550px;
+    top:50%;
+}
+.detail4{
+    position: absolute;
+    left: 23%;
+    width:550px;
+    top:55%;
+}
+.details5{
+    position: absolute;
+    left: 23%;
+    width:700px;
+    top:70%;
+}
+.details6{
+    position: absolute;
+    left: 23%;
+    width:700px;
+    top:80%;
+}
+#dropZone {
+    border: 2px dashed #bbb;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 50px;
+    text-align: center;
+    font: 21pt bold arial;
+    color: #bbb;
+  }
+  .blob-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Optional: Add some spacing between each blob entry */
+    position: relative; /* Add relative positioning */
+  }
+  
+  .blob-name {
+    flex: 1;
+    margin-right: 8px; /* Optional: Add some spacing between the blob name and the delete button */
+  }
+  
+  /* Style the delete button */
+  .btn.btn-danger {
+    position: absolute;
+    right: 5%; /* Distance the button 5% from the text */
+  }
+  

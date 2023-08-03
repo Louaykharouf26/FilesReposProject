@@ -21,7 +21,7 @@ function Login()
               
             }),
           };
-          fetch("http://localhost:4000/login",requestOptions)
+          fetch("http://backend-svc:4000/login",requestOptions)
           .then((response)=>response.json())
           .then((data)=>{console.log(data);setToken(data.token);
             

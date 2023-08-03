@@ -1,5 +1,5 @@
 import {  redirect } from "react-router-dom";
-function NavbarAfterlogin2()
+function NavbarAfterlogin2({ notifications })
 {const logout =()=>{
     localStorage.removeItem("id");
     localStorage.removeItem("username");
@@ -18,87 +18,56 @@ function NavbarAfterlogin2()
 
 </div>
 
-
-
 <nav className="header-nav ms-auto">
   <ul className="d-flex align-items-center">
-
-
-
     <li className="nav-item dropdown">
-
       <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i className="bi bi-bell"></i>
-        <span className="badge bg-primary badge-number">4</span>
+        {notifications && (
+          <span className="badge bg-primary badge-number">{notifications.length}</span>
+        )}
       </a>
-
-      <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-        <li className="dropdown-header">
-          You have 4 new notifications
-          <a href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-        </li>
-        <li>
-          <hr className="dropdown-divider"></hr>
-        </li>
-
-        <li className="notification-item">
-          <i className="bi bi-exclamation-circle text-warning"></i>
-          <div>
-            <h4>Lorem Ipsum</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>30 min. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr className="dropdown-divider"></hr>
-        </li>
-
-        <li className="notification-item">
-          <i className="bi bi-x-circle text-danger"></i>
-          <div>
-            <h4>Atque rerum nesciunt</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>1 hr. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr className="dropdown-divider"></hr>
-        </li>
-
-        <li className="notification-item">
-          <i className="bi bi-check-circle text-success"></i>
-          <div>
-            <h4>Sit rerum fuga</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>2 hrs. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr className="dropdown-divider"></hr>
-        </li>
-
-        <li className="notification-item">
-          <i className="bi bi-info-circle text-primary"></i>
-          <div>
-            <h4>Dicta reprehenderit</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>4 hrs. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr className="dropdown-divider"></hr>
-        </li>
-        <li className="dropdown-footer">
-          <a href="#">Show all notifications</a>
-        </li>
-
-      </ul>
-
+      {notifications && notifications.length > 0 ? (
+        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li className="dropdown-header">
+            You have {notifications.length} new notifications
+            <a href="#">
+              <span className="badge rounded-pill bg-primary p-2 ms-2">View all</span>
+            </a>
+          </li>
+          <li>
+            <hr className="dropdown-divider"></hr>
+          </li>
+          {notifications.map((notification, index) => (
+            <li key={index} className="notification-item">
+              {notification.icon && <i className={`bi ${notification.icon}`}></i>}
+              <div>
+                <p>{notification}</p>
+              </div>
+            </li>
+          ))}
+          <li>
+            <hr className="dropdown-divider"></hr>
+          </li>
+          <li className="dropdown-footer">
+            <a href="#">Show all notifications</a>
+          </li>
+        </ul>
+      ) : (
+        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li className="dropdown-header">
+            You have no new notifications
+          </li>
+          <li>
+            <hr className="dropdown-divider"></hr>
+          </li>
+          <li className="dropdown-footer">
+            <a href="#">Show all notifications</a>
+          </li>
+        </ul>
+      )}
     </li>
+
 
 
 

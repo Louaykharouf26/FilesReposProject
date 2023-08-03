@@ -8,7 +8,7 @@ const router = require('./Routes/routes.js')
 require("dotenv").config();
 app.use(
     cors({
-      origin: ['http://localhost:5173'],
+      origin: ['http://frontend2-svc:8000'],
       credentials: true,            //access-control-allow-credentials:true
       optionSuccessStatus: 200,
     })

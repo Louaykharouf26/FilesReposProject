@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-deployment
+  template:
+    metadata:
+      labels:
+        app: backend-deployment
+    spec:
+      containers:
+        - name: backend
+          image: louaykharouf/filesrepo:application
+          envFrom:
+            - configMapRef:
+                name: backend-configmap
+          ports:
+            - containerPort: 4000 # Replace with the port number your backend application listens on
+          imagePullPolicy: Always # Set the imagePullPolicy to always pull the latest image
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 4000
+  selector:
+    app: backend-deployment

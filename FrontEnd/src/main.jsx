@@ -9,10 +9,18 @@ import Dashboard from './Dashboard/Dashboard.jsx';
 import CreateContainer from './CreateContainer/CreateContainer.jsx';
 import CreateRepo from './CreateRepo/CreateRepo.jsx';
 import ContainerList from './container.jsx';
+import ContainerDetails from './Dashboard/ContainerDetails.jsx';
+import MyComponent from './container.jsx';
+import Formtest from './tryform/Container.jsx';
+const loggedIn = localStorage.getItem('id') !== null;
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
+  },
+  {
+    path: "/test",
+    element: <Formtest/>,
   },
   {
     path: "/Login",
@@ -24,19 +32,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/Dashboard",
-    element: <Dashboard/>,
+    element: loggedIn ? <Dashboard/>:<Login></Login>,
   },
   {
     path: "/Form",
-    element: <CreateRepo/>,
+    element: loggedIn?<CreateRepo/>:<Login></Login>,
   },
   {
     path:"/FormContainer",
-    element:<CreateContainer></CreateContainer>
+    element:loggedIn?<CreateContainer></CreateContainer>:<Login></Login>
   },
   {
     path: "/Container",
-    element: <ContainerList/>,
+    element: loggedIn?<ContainerList/>:<Login></Login>,
+  },
+  {
+    path: "/containers/:containerName",
+    element: <ContainerDetails/>
+  },
+  {
+    path: "upload",
+    element: <MyComponent></MyComponent>
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

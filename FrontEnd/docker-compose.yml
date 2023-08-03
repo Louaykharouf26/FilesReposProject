@@ -1,0 +1,15 @@
+version: "3.4"
+services:
+  frontpartfilerepo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontpart-filesrepo
+    entrypoint: /srv/app/start.sh
+    ports:
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: ./
+        target: /srv/app
+    tty: true

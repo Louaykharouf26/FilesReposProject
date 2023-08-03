@@ -1,6 +1,17 @@
 version: "3.9"
-name: "filesrepo"
+name: "gitproject"
 services:
+  application:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_URI_COMPOSE=mongodb://admin:admin@mongodb
+      - PORT=4000
+      - JWT_SECRET=secretkey
+    depends_on:
+      - "mongodb"
+
   mongodb:
     image: "mongo"
     ports:
@@ -21,7 +32,22 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=admin  
       - ME_CONFIG_MONGODB_SERVER=mongodb
     depends_on:
-     - "mongodb"
+      - "mongodb"
 
+
+  frontfilerepo:
+    build:
+      context: ../../Frontend
+      dockerfile: Dockerfile
+    container_name: frontend-repo
+    ports:
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: ../../Frontend
+        target: /srv/app
+    tty: true
+    depends_on:
+      - "application" # Assuming your front-end needs to connect to the Node.js application
 volumes:
   mongo-volume:
