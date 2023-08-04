@@ -25,9 +25,9 @@ pipeline {
         echo "======== Executing ========"
         sh "pwd"
         sh "ls"
-        dir('BackEnd/Terraform') {
+        dir('BackEnd/API/Terraform') {
             sh "terraform init"
-            sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/terraform.tfvars.json"
+            sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/API/Terraform/terraform.tfvars.json"
        // sh "terraform import azurerm_storage_container.scriptscontainer /subscriptions/\$(terraform output subscription_id)/resourceGroups/\$(terraform output resource_group_name)/providers/Microsoft.Storage/storageAccounts/\$(terraform output storage_account_name)/blobServices/default/containers/\$(terraform output container_name)"
 
         //sh "terraform apply --auto-approve --var-file=/var/jenkins_home/workspace/FilesRepoPipeline/BackEnd/Terraform/Container/terraform.tfvars.json "
