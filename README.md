@@ -4,3 +4,4 @@ The application is made with ReactJS for the frontend , NodeJS for the backend a
 The storage of files happens on Azure storage account 
 The creation of the storage account and the containers is by Terraform
 and the whole process happens through Jenkins Pipelines 
+This application is deployed on AKS cluster 
